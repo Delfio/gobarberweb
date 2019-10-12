@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
+
+import AuthLayout from '../pages/_layouts/auth';
+import DefaultLayout from '../pages/_layouts/default';
+
 //Criando logica de rota privada
 export default function RouteWrapper({
   component: Component,
@@ -21,10 +25,16 @@ export default function RouteWrapper({
     return <Redirect to ="Dashboard" />
   }
 
+  const Layout = signed ? DefaultLayout : AuthLayout;
+
   return (
     <Route
       { ...rest }
-      component={Component}
+      render={props => (
+        <Layout>
+          <Component {...props} />
+        </Layout>
+      )}
       />
   )
 }
