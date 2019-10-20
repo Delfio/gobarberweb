@@ -6,6 +6,11 @@ import * as Yup from 'yup';
 
 import logo from '~/assets/logo.svg'
 
+const schema = Yup.object().shape({
+  email: Yup.string().email('Insira um email Válido!').required('Email Obrigatório'),
+  password: Yup.string().required("Favor insira sua senha")
+});
+
 export default function SingnIn() {
 
   function handleSubmit(data){
@@ -16,7 +21,7 @@ export default function SingnIn() {
     <>
       <img src={logo} alt="go-barber"/>
 
-      <Form onSubmit={handleSubmit}>
+      <Form schema={schema} onSubmit={handleSubmit}>
         <Input type="email" name="email" placeholder="seu email" id=""/>
         <Input type="password" placeholder="sua senha" name="password" id=""/>
 
