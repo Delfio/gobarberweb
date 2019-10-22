@@ -6,7 +6,7 @@ import AuthLayout from '~/pages/_layouts/auth';
 import DefaultLayout from '~/pages/_layouts/default';
 
 //store do redux
-import store from '~/store';
+import {store} from '~/store';
 
 //Criando logica de rota privada
 export default function RouteWrapper({
