@@ -5,6 +5,9 @@ import { Route, Redirect } from 'react-router-dom';
 import AuthLayout from '~/pages/_layouts/auth';
 import DefaultLayout from '~/pages/_layouts/default';
 
+//store do redux
+import store from '~/store';
+
 //Criando logica de rota privada
 export default function RouteWrapper({
   component: Component,
@@ -12,7 +15,7 @@ export default function RouteWrapper({
   ...rest
 }) {
   //Informação para saber se o usuario está logado
-  const signed = false;
+  const { signed } = store.getState().auth;
 
   //Não está logado e a rota é privada - redirecionar para home
   if(!signed && isPrivate){
