@@ -22,6 +22,9 @@ export function* signIn({ payload }) {
       return;
     }
 
+    //api.defaults.headers.Authorization = `Bearer ${token}`; mesma coisa
+    api.defaults.headers['Authorization'] = `Bearer ${token}`;
+
     yield put(signInSucess(token, user));
 
     history.push('/dashboard');
@@ -49,8 +52,22 @@ export function* signUp ({ payload }) {
     yield put(signFailure());
   }
 }
+export function setToken ({ payload }) {
+  const { token } = payload.auth;
+
+  if(!payload) {
+    console.log("asdfasdf")
+    return
+  }
+
+  if(token) {
+    api.defaults.headers['Authorization'] = `Bearer ${token}`;
+  }
+
+}
 
 export default all([
+  takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
 ]);
