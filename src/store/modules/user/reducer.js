@@ -12,6 +12,7 @@ export default function user (state = INITIAL_STATE, action) {
         break;
       }
       case '@user/UPDATA_PROFILE_SUCESS': {
+        console.tron.log("Update foi enviado - ", action.payload.profile);
         draft.profile = action.payload.profile;
         break;
       }
