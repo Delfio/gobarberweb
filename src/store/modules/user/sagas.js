@@ -8,10 +8,10 @@ import { updateProfileSucess, updateProfileFailure } from './actions'
 export function* updataPorfile({payload}){
   try{
 
-    const {name, email, ...rest} = payload.data;
+    const {name, email, avatar_id, ...rest} = payload.data;
 
     const profile = Object.assign(
-      { name, email },
+      { name, email, avatar_id },
       rest.oldPassword ? rest : {}
     );
     const response = yield call(api.put, 'users', profile);
